@@ -257,13 +257,14 @@ export default function Home() {
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
           {/* Badge */}
-          <div className="inline-block mb-6 px-4 py-2 rounded-full border border-indigo-400/50 bg-indigo-500/10 backdrop-blur-sm">
+          <div className="mt-20 md:mt-0 inline-block mb-6 px-4 py-2 rounded-full border border-indigo-400/50 bg-indigo-500/10 backdrop-blur-sm">
             <span className="text-sm font-semibold text-indigo-300">⚡ DEMO решения за 48 часов - БЕСПЛАТНО</span>
           </div>
 
+
           {/* Main heading */}
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            Сократите расходы на{" "}
+            Сократите расходы на <br />{" "}
             <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                30-45% за 48 часов без сокращений
             </span>
