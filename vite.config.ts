@@ -30,20 +30,20 @@ function trimLogFile(logPath: string, maxSize: number) {
       return;
     }
 
-    const lines = fs.readFileSync(logPath, "utf-8").split("\n");
+    const lines = fs.readFileSync(logPath, "utf-8").split("\\n");
     const keptLines: string[] = [];
     let keptBytes = 0;
 
     // Keep newest lines (from end) that fit within 60% of maxSize
     const targetSize = TRIM_TARGET_BYTES;
     for (let i = lines.length - 1; i >= 0; i--) {
-      const lineBytes = Buffer.byteLength(`${lines[i]}\n`, "utf-8");
+      const lineBytes = Buffer.byteLength(`${lines[i]}\\n`, "utf-8");
       if (keptBytes + lineBytes > targetSize) break;
       keptLines.unshift(lines[i]);
       keptBytes += lineBytes;
     }
 
-    fs.writeFileSync(logPath, keptLines.join("\n"), "utf-8");
+    fs.writeFileSync(logPath, keptLines.join("\\n"), "utf-8");
   } catch {
     /* ignore trim errors */
   }
@@ -62,7 +62,7 @@ function writeToLogFile(source: LogSource, entries: unknown[]) {
   });
 
   // Append to log file
-  fs.appendFileSync(logPath, `${lines.join("\n")}\n`, "utf-8");
+  fs.appendFileSync(logPath, `${lines.join("\\n")}\\n`, "utf-8");
 
   // Trim if exceeds max size
   trimLogFile(logPath, MAX_LOG_SIZE_BYTES);
@@ -156,13 +156,12 @@ export default defineConfig({
   plugins,
   resolve: {
     alias: {
-      "@": path.resolve(import.meta.dirname, "client", "src"),
+      "@": path.resolve(import.meta.dirname, "src"),
       "@shared": path.resolve(import.meta.dirname, "shared"),
       "@assets": path.resolve(import.meta.dirname, "attached_assets"),
     },
   },
   envDir: path.resolve(import.meta.dirname),
-  root: path.resolve(import.meta.dirname, "client"),
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
